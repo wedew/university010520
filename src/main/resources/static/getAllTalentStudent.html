@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>all talent student</title>
+    <script src="jquery-3.5.0.js"></script>
+</head>
+<script>
+    $(function () {
+        $.ajax({
+            url:"/betsefer/getAllTalentStudents",
+            success:function (students) {
+                for(let i = 0; i<students.length; i++){
+                    $("#studentTable").append("<tr><td>" + students[i].id + "</td>" + "<td>" + students[i].name + "</td>" + "<td>" + students[i].grade + "</td></tr>")
+                }
+            }
+        })
+    })
+</script>
+
+<style>
+    table {
+        font-family: arial, sans-serif;
+        border-collapse: collapse;
+        width: 35%;
+    }
+    td, th {
+        border: 1px solid #dddddd;
+        text-align: left;
+        padding: 8px;
+    }
+    tr:nth-child(even) {
+        background-color: #dddddd;
+    }
+</style>
+<body>
+<h2>all talent students</h2>
+<table id="studentTable">
+    <tr>
+        <th>Id</th>
+        <th>Student Name</th>
+        <th>Grade</th>
+    </tr>
+</table>
+</body>
+</html>

@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>all courses</title>
+    <script src="jquery-3.5.0.js"></script>
+</head>
+<script>
+    $(function () {
+        $.ajax({
+            url:"/betsefer/getAllCourse",
+            success:function (courses) {
+                for(let i = 0; i<courses.length; i++){
+                    $("#b1").append("<table id='c"+i+"'><tr><th>" + "course id: " +  courses[i].id + ",  name: " +  courses[i].name +
+                        ", duration: " + courses[i].duration + "</th></tr>" + "<tr><th>Id</th><th>Student Name</th><th>Grade</th></tr>" + "</table><br/>");
+
+                    for(let t = 0; t<courses[i].students.length; t++){
+                        $("#c"+i).append("<tr><th>" + courses[i].students[t].id + "</th>" + "<th>" + courses[i].students[t].name
+                            + "</th>" + "<th>" + courses[i].students[t].grade + "</th></tr>")
+                    }
+                }
+            }
+        })
+    })
+</script>
+<style>
+    table {
+        font-family: arial, sans-serif;
+        border-collapse: collapse;
+        width: 30%;
+    }
+    td, th {
+        border: 1px solid #dddddd;
+        text-align: left;
+        padding: 8px;
+    }
+    tr:nth-child(odd) {
+        background-color: #dddddd;
+    }
+</style>
+<body id="b1">
+<h2>all courses</h2>
+
+</body>
+</html>

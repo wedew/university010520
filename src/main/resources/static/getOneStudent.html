@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>one student information</title>
+    <script src="jquery-3.5.0.js"></script>
+</head>
+<script>
+    $(function () {
+        $("#getStudentButton").click(function () {
+            $.ajax({
+                url:"betsefer/getOneStudent?studentId="+ $("#studentId").val(),
+                success:function (students) {
+                    $("#studentTable").html("<td>" + students.id + "</td>" + "<td>" + students.name + "</td>" + "<td>" + students.grade + "</td>")
+                },
+                error:function (err) {
+                    alert(err.responseText);
+                }
+            })
+        })
+    })
+</script>
+<style>
+    table {
+        font-family: arial, sans-serif;
+        border-collapse: collapse;
+        width: 35%;
+    }
+    td, th {
+        border: 1px solid #dddddd;
+        text-align: left;
+        padding: 8px;
+    }
+    tr:nth-child(even) {
+        background-color: #dddddd;
+    }
+</style>
+<body>
+<u><h2 id="a">get student information</h2></u>
+<form id="getStudent">
+    <input type="number" placeholder="enter student id" id="studentId" />
+    <input type="button" value="submit" id="getStudentButton" />
+    <br/><br/>
+</form>
+    <table>
+        <tr>
+            <th>Id</th>
+            <th>Student Name</th>
+            <th>Grade</th>
+        </tr>
+        <tr id="studentTable">
+        </tr>
+    </table>
+
+</body>
+</html>

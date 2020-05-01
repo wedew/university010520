@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>get course information</title>
+    <script src="jquery-3.5.0.js"></script>
+</head>
+<script>
+    $(function () {
+        $("#getCourseButton").click(function () {
+            let path;
+            if($("#courseId").val() == ""){
+                path = "betsefer/getOneCourseByName?courseName="+ $("#courseName").val()
+            }else if($("#courseName").val() == ""){
+                path = "betsefer/getOneCourse?courseId="+ $("#courseId").val()
+            }
+            $.ajax({
+                url: path,
+                success:function (course) {
+                    $("#b1").html("<tr><th>" + "course id: " +  course.id + ",  name: " +  course.name +
+                        ", duration: " + course.duration + "</th></tr>" + "<tr><th>Id</th><th>Student Name</th><th>Grade</th></tr>" );
+
+                    for(let t = 0; t<course.students.length; t++){
+                        $("#b1").append("<tr><th>" + course.students[t].id + "</th>" + "<th>" + course.students[t].name
+                            + "</th>" + "<th>" + course.students[t].grade + "</th></tr>")
+                    }
+                },error:function (err) {
+                    alert(err.responseText)
+                }
+            })
+        })
+    })
+
+</script>
+<style>
+    table {
+        font-family: arial, sans-serif;
+        border-collapse: collapse;
+        width: 50%;
+    }
+    td, th {
+        border: 1px solid #dddddd;
+        text-align: left;
+        padding: 8px;
+    }
+    tr:nth-child(even) {
+        background-color: #dddddd;
+    }
+</style>
+<body>
+
+<u><h2 id="a">get course information</h2></u>
+<form id="getCourse">
+    <input type="number" placeholder="enter course id" id="courseId" />
+    <div>or</div>
+    <input type="text" placeholder="enter course name" id="courseName" />
+    <br/>
+    <input type="button" value="submit" id="getCourseButton" />
+    <br/><br/>
+</form>
+<table id="b1">
+    <tr id="studentTable">
+
+    </tr>
+</table>
+
+
+</body>
+</html>

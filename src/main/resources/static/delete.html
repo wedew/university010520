@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>delete students/courses</title>
+    <script src="jquery-3.5.0.js"></script>
+</head>
+<script>
+    $(function () {
+        $("#deleteStudentButton").click(function () {
+            $.ajax({
+                url:"betsefer/deleteStudent?studentId=" + $("#studentId").val(),
+                type:"DELETE",
+                success:function (result) {
+                    alert(result);
+                },
+                error:function (err) {
+                    alert(err.responseText);
+                }
+            })
+        });
+        $("#deleteCourseButton").click(function () {
+            $.ajax({
+                url:"betsefer/deleteCourse?courseId=" + $("#courseId").val(),
+                type:"DELETE",
+                success:function (result) {
+                    alert(result);
+                },
+                error:function (err) {
+                    alert(err.responseText);
+                }
+            })
+        });
+    });
+</script>
+<body>
+<form id="deleteStudent">
+    <h3><u>delete student:</u></h3>
+    <input type="number" placeholder="student id" id="studentId" />
+    <input type="button" value="delete student" id="deleteStudentButton" />
+</form><br/><br/>
+<form id="deleteCourse">
+       <h3><u>delete course:</u></h3>
+    <input type="number" placeholder="course id" id="courseId" />
+    <input type="button" value="delete course" id="deleteCourseButton" />
+</form>
+</body>
+</html>

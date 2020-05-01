@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>add student form</title>
+    <script src="jquery-3.5.0.js"></script>
+</head>
+<script>
+    $(function () {
+
+        $(function () {
+            $.ajax({
+                url:"/betsefer/getAllCourse",
+                success:function (courses) {
+                     for(let i = 0; i< courses.length; i++){
+                         $("#studentCourse").append(
+                             "<option value='"+ courses[i].id +"'>" + courses[i].name+ "</option>"
+                        )
+                    }
+                }
+            })
+        });
+
+            $("#studentRegisterButton").click(function () {
+            $.ajax({
+                url:"/betsefer/getOneCourse?courseId=" + $("#studentCourse").val(),
+                success:function (course) {
+                    let student = {
+                        course:{
+                             duration: course.duration,
+                             id: course.id,
+                             name:course.name,
+                            students:[null]
+                        },
+                        grade: $("#studentGrade").val(),
+                         name: $("#studentName").val()
+                    };
+                    $.ajax({
+                        url:"/betsefer/addStudent",
+                        type:"POST",
+                        data:JSON.stringify(student),
+                        contentType:"application/json",
+                        success: function (response) {
+                             alert(response);
+                        },
+                        error:function (err) {
+                             alert(err.responseText);
+                        }
+                    })
+                }
+            });
+        });
+    })
+</script>
+
+<style>
+   #a,#addStudent{
+       text-align: center;
+   }
+</style>
+
+<body>
+
+<u><h2 id="a">add student form</h2></u>
+<form id="addStudent">
+
+    <input type="text" placeholder="student name" id="studentName" />
+    <br/><br/>
+    <input type="number" placeholder="student grade" id="studentGrade" />
+    <br/><br/>
+    student course:
+    <select id="studentCourse">
+    </select>
+    <br/><br/>
+    <input type="button" value="register student" id="studentRegisterButton" />
+</form>
+
+</body>
+</html>

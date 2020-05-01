@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>add course</title>
+    <script src="jquery-3.5.0.js"></script>
+</head>
+<script>
+    $(function () {
+        $("#addCourseButton").click(function () {
+            let course = {
+                duration: $("#courseDuration").val(),
+                name: $("#courseName").val()
+            };
+            $.ajax({
+                url:"/betsefer/addCourse",
+                type:"POST",
+                data:JSON.stringify(course),
+                contentType:"application/json",
+                success: function (response) {
+                    alert(response);
+                },
+                error:function (err) {
+                    alert(err.responseText);
+                }
+            })
+        })
+    })
+</script>
+<body>
+<style>
+    #a,#addCourse{
+        text-align: center;
+    }
+</style>
+<u><h2 id="a">add course form</h2></u>
+<form id="addCourse">
+
+    <input type="text" placeholder="course name" id="courseName" />
+    <br/><br/>
+    <input type="number" placeholder="course duration in hours" id="courseDuration" />
+    <br/><br/>
+    <input type="button" value="add course" id="addCourseButton" />
+</form>
+</body>
+</html>
