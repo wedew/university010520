@@ -79,4 +79,8 @@ public class ManagerFacade {
         }
         return talentStudent;
     }
+
+    public String getCourseNameByStudentId(int studentId) throws StudentDoesNotExist {
+        return studentRepo.findById(studentId).orElseThrow(StudentDoesNotExist::new).getCourse().getName();
+    }
 }

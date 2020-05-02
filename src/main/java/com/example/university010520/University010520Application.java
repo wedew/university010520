@@ -58,5 +58,11 @@ public class University010520Application {
 //            System.out.println(student);
 //        }
 
+//        try {
+//            System.out.println(managerFacade.getCourseNameByStudentId(21));
+//        } catch (StudentDoesNotExist e) {
+//            System.out.println(e.getMessage());
+//        }
+
     }
 }

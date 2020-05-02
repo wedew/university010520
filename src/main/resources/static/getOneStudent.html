@@ -8,15 +8,25 @@
 <script>
     $(function () {
         $("#getStudentButton").click(function () {
+            let course;
+            $.ajax({
+                url:"/betsefer/getCourseNameByStudentId?studentId=" + $("#studentId").val(),
+                success:function (courseName) {
+                    course = courseName;
+                }
+            });
             $.ajax({
                 url:"betsefer/getOneStudent?studentId="+ $("#studentId").val(),
                 success:function (students) {
-                    $("#studentTable").html("<td>" + students.id + "</td>" + "<td>" + students.name + "</td>" + "<td>" + students.grade + "</td>")
+                    $("#studentTable").html(" ");
+                    $("#studentTable").html("<td>" + students.id + "</td>" + "<td>" + students.name + "</td>" + "<td>" + students.grade + "</td>"
+                        + "<td>" + course + "</td>")
                 },
                 error:function (err) {
                     alert(err.responseText);
                 }
-            })
+            });
+
         })
     })
 </script>
@@ -47,6 +57,7 @@
             <th>Id</th>
             <th>Student Name</th>
             <th>Grade</th>
+            <th>course</th>
         </tr>
         <tr id="studentTable">
         </tr>

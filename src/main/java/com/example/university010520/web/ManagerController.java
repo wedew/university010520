@@ -59,14 +59,17 @@ public class ManagerController {
         } catch (CourseDoesNotExist e) {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getMessage());
         }}
+
     @GetMapping("/getAllStudent")
     public List<Student> getAllStudent(){
         return managerFacade.getAllStudent();
     }
+
     @GetMapping("/getAllCourse")
     public List<Course> getAllCourse(){
         return managerFacade.getAllCourse();
     }
+
     @GetMapping("/getOneStudent")
     public ResponseEntity<?> getStudentById(int studentId){
         try {
@@ -74,6 +77,7 @@ public class ManagerController {
         } catch (StudentDoesNotExist e) {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getMessage());
         }}
+
     @GetMapping("/getOneCourse")
     public ResponseEntity<?> getCourseById(int courseId){
         try {
@@ -93,5 +97,14 @@ public class ManagerController {
     @GetMapping("/getAllTalentStudents")
     public List<Student> getAllTalentStudent(){
         return managerFacade.getAllTalentStudent();
+    }
+
+    @GetMapping("/getCourseNameByStudentId")
+    public ResponseEntity<String> getCourseNameByStudentId(@RequestParam int studentId){
+        try {
+            return ResponseEntity.ok(managerFacade.getCourseNameByStudentId(studentId));
+        } catch (StudentDoesNotExist e) {
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getMessage());
+        }
     }
 }

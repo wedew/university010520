@@ -11,10 +11,16 @@
             url:"/betsefer/getAllStudent",
             success:function (students) {
                 for(let i = 0; i<students.length; i++){
-                    $("#studentTable").append("<tr><td>" + students[i].id + "</td>" + "<td>" + students[i].name +
-                        "</td>" + "<td>" + students[i].grade + "</td></tr>")
+                    $("#studentTable").append("<tr id='" + "t"+i + "'><td>" + students[i].id + "</td>" + "<td>" + students[i].name +
+                        "</td>" + "<td>" + students[i].grade + "</td>");
+                    $.ajax({
+                        url:"/betsefer/getCourseNameByStudentId?studentId=" + students[i].id,
+                        success:function (courseName) {
+                            $("#t"+i).append("<td>" + courseName + "</td></tr>")
+                        }
+                    })
+                    }
                 }
-            }
         })
     })
 </script>
@@ -40,6 +46,7 @@
         <th>Id</th>
         <th>Student Name</th>
         <th>Grade</th>
+        <th>course</th>
     </tr>
 </table>
 </body>
