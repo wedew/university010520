@@ -4,6 +4,8 @@
     <meta charset="UTF-8">
     <title>all students</title>
     <script src="jquery-3.5.0.js"></script>
+    <script src="https://www.kryogenix.org/code/browser/sorttable/sorttable.js"></script>
+
 </head>
 <script>
     $(function () {
@@ -22,7 +24,11 @@
                     }
                 }
         })
-    })
+
+    });
+
+
+
 </script>
 <style>
     table {
@@ -41,7 +47,7 @@
 </style>
 <body>
 <h2>all students</h2>
-<table id="studentTable">
+<table id="studentTable" class="sortable">
     <tr>
         <th>Id</th>
         <th>Student Name</th>
@@ -49,5 +55,7 @@
         <th>course</th>
     </tr>
 </table>
+<input type="button" onclick="window.location='index.html'" value="go back to index" />
+
 </body>
 </html>
